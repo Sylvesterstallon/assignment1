@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-         <input v-model="todoText" class="col form-control mx-2" type="text" />
+         <input @change="todoTextChange" v-bind:value="todoText" class="col form-control mr-2" type="text" />
          <button @click="addTodo1" class="btn btn-primary">Add</button>
         </div>
     </div>
@@ -20,11 +20,16 @@ export default {
     },
     methods: {
         ...mapActions(["addTodo"]),
+        todoTextChange(e) {
+            this.todoText = e.target.value
+        },
+
         addTodo1() {
             this.addTodo({
                 id: v1(),
                 tittle: this.todoText
-            })
+            });
+            this.todoText = "";
         }
     }
 
